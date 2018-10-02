@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebPackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -69,6 +70,14 @@ module.exports = {
       filename: './index.html',
       hash: true,
     }),
+    new CopyWebPackPlugin([
+      {from:'./resources/images/', to:'dist/images/'},
+      {from:'./resources/js/', to:'dist/js/'},
+      {from:'./resources/css/', to:'dist/css/'},
+      {from:'./resources/favicon.png', to:'dist/favicon.png'}
+    ],{
+
+    })
   ],
 
   devServer: {
