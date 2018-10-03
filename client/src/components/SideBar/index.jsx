@@ -3,6 +3,15 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 class SideBar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = this.props.value;
+
+        this.onSearchBlur = this.onSearchBlur.bind(this);
+        this.onSearchFocus = this.onSearchFocus.bind(this);
+
+    }
     componentDidMount() {
         /*
         const { onLoad } = this.props;
@@ -11,19 +20,34 @@ class SideBar extends React.Component {
           .then((res) => onLoad(res.data));
           */
     }
+    onSearchBlur(event) {
+        if (event.target.value == '') {
+            event.target.value = 'Search here...';
+        }
+    }
+    
+    onSearchFocus(event) {
+        if (event.target.value == 'Search here...') {
+            event.target.value = '';
+        }
+    }
     render() {
         /*
         const { articles } = this.props;
        */
+      
+      const categories = this.state.categories.map(category => 
+        <li key={category.id}><a href="#" title={category.name}>{category.name}</a> ({category.quantity}) </li>
+    );
         return (
             <div id="sidebar" className="four columns">
 
                 <div className="widget widget_search">
                     <h3>Search</h3>
-                    <form action="#">
+                    <form action="/search">
 
-                        <input type="text" placeholder="Search here..." onBlur={() => { if (this.value == '') { this.value = 'Search here...'; } }} onFocus={() => { if (this.value == 'Search here...') { this.value = ''; } }} className="text-search" />
-                        <input type="submit" className="submit-search" />
+                        <input type="text" placeholder="Search here..." onBlur={this.onSearchBlur} onFocus={this.onSearchFocus} className="text-search" />
+                        <input type="submit" className="submit-search" value="" />
 
                     </form>
                 </div>
@@ -31,6 +55,7 @@ class SideBar extends React.Component {
                 <div className="widget widget_categories group">
                     <h3>Categories.</h3>
                     <ul>
+                        {categories}
                         <li><a href="#" title="">Wordpress</a> (2)</li>
                         <li><a href="#" title="">Ghost</a> (14)</li>
                         <li><a href="#" title="">Joomla</a> (5)</li>

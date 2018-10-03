@@ -14,7 +14,7 @@ class Header extends React.Component {
 
                     <div className="header-content twelve columns">
 
-                        <h1 id="logo-text"><a href="index.html" title="">Live simple. Code simple</a></h1>
+                        <h1 id="logo-text"><a href="index.html" title="">Ngộ's blog</a></h1>
                         <p id="intro">I don't have a slogan right now....</p>
 
                     </div>

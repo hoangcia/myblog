@@ -3,11 +3,17 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 class BlogEntry extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+
+        let value = props.value;
+
         this.state = {
-            id : props.id,
-            date: props.date,
+            id: value.id,
+            title: value.title,
+            date: value.date,
+            tags: value.tags,
+            content: value.content,
             isToggleContentOn: true
         };
         //binding event handlers - required in the callback
@@ -21,50 +27,57 @@ class BlogEntry extends React.Component {
           .then((res) => onLoad(res.data));
           */
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
 
     }
-    toggleContent(e){
+    toggleContent(e) {
         e.preventDefault();
 
         let divBlogContent = this.state.id + "-content";
         let element = document.getElementById(divBlogContent);
         let isToggleContentOn = this.state.isToggleContentOn;
 
-        if(isToggleContentOn)
-        {
+        if (isToggleContentOn) {
             element.style.display = "none";
-            this.setState({isToggleContentOn: !isToggleContentOn});                        
+            this.setState({ isToggleContentOn: !isToggleContentOn });
         }
-        else{
+        else {
             element.style.display = "block";
-            this.setState({isToggleContentOn: !isToggleContentOn});            
+            this.setState({ isToggleContentOn: !isToggleContentOn });
         }
-    }       
+    }
     render() {
+        const state = this.state,
+            tags = state.tags.map((tag, index, array) => {
+                return (
+                    <li key={tag.id}>
+                        <a href={"/catagory/" + tag.id} title={tag.name} rel="category tag">{tag.name}</a>
+                        {index < array.length - 1 ? <span className="meta-sep">&bull;</span>:""}
+                    </li>
+
+                );
+            });
         return (
             <article className="entry">
 
                 <header className="entry-header">
 
                     <h2 className="entry-title">
-                        <a href="/single/:id" title="">Hey, We Love Open Sans!</a>
+                        <a href="/single/:id" title={this.state.title}>{this.state.title}</a>
                     </h2>
 
                     <div className="entry-meta">
                         <ul>
-                            <li>{this.state.date.toDateString()}</li>
+                            <li>{state.date.toDateString()}</li>
                             <span className="meta-sep">&bull;</span>
-                            <li><a href="#" title="" rel="category tag">Ghost</a></li>
-                            <span className="meta-sep">&bull;</span>
-                            <li>John Doe</li>
+                            {tags}
                         </ul>
                     </div>
                     <button onClick={this.toggleContent}>{this.state.isToggleContentOn ? 'Hide' : 'Show'}</button>
                 </header>
 
-                <div className="entry-content" id={this.state.id + "-content"}>
-                    <p>Duis ex ad cupidatat tempor Excepteur cillum cupidatat fugiat nostrud cupidatat dolor sunt sint sit nisi est eu exercitation incididunt adipisicing veniam velit id fugiat enim mollit amet anim veniam dolor dolor irure velit commodo cillum sit nulla ullamco magna amet magna cupidatat qui labore cillum sit in tempor veniam consequat non laborum adipisicing aliqua ea nisi sint ut quis proident ullamco ut dolore culpa occaecat ut laboris in sit minim cupidatat ut dolor voluptate enim veniam consequat occaecat fugiat in adipisicing in amet Ut nulla nisi non ut enim aliqua laborum mollit quis nostrud sed sed.</p>
+                <div className="entry-content" id={state.id + "-content"}>
+                    <p>{state.content}</p>
                 </div>
 
             </article> // end entry
@@ -72,7 +85,7 @@ class BlogEntry extends React.Component {
     }
 }
 const mapStateToProps = state => ({
-    
+
 });
 
 const mapDispatchToProps = dispatch => ({
