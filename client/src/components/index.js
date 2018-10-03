@@ -6,3 +6,4 @@ export {default as Header} from './Header';
 export {default as Footer} from './Footer';
 export {default as HomeContent} from './HomeContent';
 export {default as SideBar} from './SideBar';
+export {default as BlogEntry} from './BlogEntry';

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import SideBar from '../SideBar';
+import BlogEntry from '../BlogEntry';
 
 class HomeContent extends React.Component {
     componentDidMount() {
@@ -17,12 +18,16 @@ class HomeContent extends React.Component {
         /*
         const { articles } = this.props;
        */
+      let date = new Date('2018-06-24T14:22:33');
+      
         return (
             <div id="content-wrap">
 
                 <div className="row">
 
                     <div id="main" className="eight columns">
+
+                        <BlogEntry date={date} id={"648a9741"}/>
 
                         <article className="entry">
 
