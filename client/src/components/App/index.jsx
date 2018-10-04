@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 
-import { Home, About } from '../';
+import { Home, About, Page } from '../';
 
 
 class App extends React.Component {
@@ -15,6 +15,7 @@ class App extends React.Component {
     document.body.onload = (() => this.onLoad(jQuery));
   }
 
+  //after body loaded
   onLoad($) {
 
     /* Mobile Menu
@@ -92,7 +93,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
-
+        <Route exact path="/page" component={Page} />
       </Switch>
     )
   }

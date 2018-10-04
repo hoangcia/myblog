@@ -1,16 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import SearchForm from './SearchForm';
+
+export { default as SearchForm } from './SearchForm';
 
 class SideBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = this.props.value;
-
-        this.onSearchBlur = this.onSearchBlur.bind(this);
-        this.onSearchFocus = this.onSearchFocus.bind(this);
-
+        this.state = this.props.value || {};                
+        
+        this.handleSearchChange = this.handleSearchChange.bind(this);
     }
     componentDidMount() {
         /*
@@ -20,16 +21,11 @@ class SideBar extends React.Component {
           .then((res) => onLoad(res.data));
           */
     }
-    onSearchBlur(event) {
-        if (event.target.value == '') {
-            event.target.value = 'Search here...';
-        }
-    }
-    
-    onSearchFocus(event) {
-        if (event.target.value == 'Search here...') {
-            event.target.value = '';
-        }
+    handleSearchChange(value){
+        this.setState({searchValue: value});
+        console.log(value);
+        console.log(this.state.searchValue);
+         
     }
     render() {
         /*
@@ -37,20 +33,13 @@ class SideBar extends React.Component {
        */
       
       const categories = this.state.categories.map(category => 
-        <li key={category.id}><a href="#" title={category.name}>{category.name}</a> ({category.quantity}) </li>
+        <li key={category.id}><a href="#" title={category.name}>{category.name}</a> ({category.quantity})</li>
     );
         return (
             <div id="sidebar" className="four columns">
 
-                <div className="widget widget_search">
-                    <h3>Search</h3>
-                    <form action="/search">
-
-                        <input type="text" placeholder="Search here..." onBlur={this.onSearchBlur} onFocus={this.onSearchFocus} className="text-search" />
-                        <input type="submit" className="submit-search" value="" />
-
-                    </form>
-                </div>
+                <SearchForm key="search-form1" id="search-form1" onSearchChange={this.handleSearchChange} searchValue={this.state.searchValue}/>
+                <SearchForm key="search-form2" id="search-form2" onSearchChange={this.handleSearchChange} searchValue={this.state.searchValue}/>
 
                 <div className="widget widget_categories group">
                     <h3>Categories.</h3>

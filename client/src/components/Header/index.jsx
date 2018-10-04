@@ -3,6 +3,12 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 class Header extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            currentPage: props.pageName
+        };
+    }
     componentDidMount() {
 
     }
@@ -29,15 +35,15 @@ class Header extends React.Component {
                     <div className="row">
 
                         <ul id="nav" className="nav">
-                            <li className="current"><a href="/">Home</a></li>
-                            <li><a href="/archives">Archives</a></li>
-                            <li className="has-children"><a href="/archives/single">Blog</a>
+                            <li className={this.state.currentPage == "home"?"current":""}><a href="/">Home</a></li>
+                            <li className={this.state.currentPage == "archives"?"current":""}><a href="/archives">Archives</a></li>
+                            <li className={this.state.currentPage == "blog" || this.state.currentPage == "single" ? "current has-children":"has-children"}><a href="/archives/single">Blog</a>
                                 <ul>
                                     <li><a href="/archives/blog">Blog Entries</a></li>
                                     <li><a href="/archives/single">Single Blog</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/page">Page</a></li>
+                            <li className={this.state.currentPage == "page"?"current":""}><a href="/page">Page</a></li>
                         </ul>
 
                     </div>
