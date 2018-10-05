@@ -9,12 +9,12 @@ import HomeContent from '../HomeContent';
 
 class Home extends React.Component {
   componentDidMount() {
-    /*
+    
     const { onLoad } = this.props;
 
     axios('http://localhost:8000/api/articles')
       .then((res) => onLoad(res.data));
-      */
+      
   }
   render() {
     /*

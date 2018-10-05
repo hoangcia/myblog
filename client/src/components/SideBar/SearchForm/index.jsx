@@ -27,12 +27,13 @@ class SearchForm extends React.Component {
         event.preventDefault();
     }
     handleInputOnInput(event) {
-        
+        const state = this.state;
+
         this.setState({
             [event.target.name]: event.target.value
         });
 
-        if(this.state.searchValue != event.target.value){
+        if(state[event.target.name] != event.target.value){
             this.props.onSearchChange(event.target.value);
         }
     }
@@ -43,6 +44,10 @@ class SearchForm extends React.Component {
         this.setState({
             [inputName]: value
         });
+
+        if(this.state[inputName] != value){
+            this.props.onSearchChange(this.props.id, value);
+        }
 
     }
     componentDidMount() {
