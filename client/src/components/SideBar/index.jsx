@@ -9,8 +9,10 @@ class SideBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = this.props.value || {};                
-        
+        this.state = this.props.value || {};
+        this.state["search-form1"] = "";
+        //this.state["search-form2"] = "";
+
         this.handleSearchChange = this.handleSearchChange.bind(this);
     }
     componentDidMount() {
@@ -21,26 +23,36 @@ class SideBar extends React.Component {
           .then((res) => onLoad(res.data));
           */
     }
-    handleSearchChange(value){
-        this.setState({searchValue: value});
-        console.log(value);
-        console.log(this.state.searchValue);
-         
+    handleSearchChange(id, value) {
+        
+        this.setState({[id]: value});
+        /*
+        if (id === "search-form1") {
+            this.setState({
+                "search-form2": value
+            });
+        }        
+        */
+
+        //console.log(value);
+        //console.log(this.state.searchValue);
+
     }
     render() {
         /*
         const { articles } = this.props;
        */
-      
-      const categories = this.state.categories.map(category => 
-        <li key={category.id}><a href="#" title={category.name}>{category.name}</a> ({category.quantity})</li>
-    );
+
+        const categories = this.state.categories.map(category =>
+            <li key={category.id}><a href="#" title={category.name}>{category.name}</a> ({category.quantity})</li>
+        );
         return (
             <div id="sidebar" className="four columns">
 
-                <SearchForm key="search-form1" id="search-form1" onSearchChange={this.handleSearchChange} searchValue={this.state.searchValue}/>
-                <SearchForm key="search-form2" id="search-form2" onSearchChange={this.handleSearchChange} searchValue={this.state.searchValue}/>
-
+                <SearchForm key="search-form1" id="search-form1" onSearchChange={this.handleSearchChange} searchValue={this.state["search-form1"]} />
+                {/*
+                <SearchForm key="search-form2" id="search-form2" onSearchChange={this.handleSearchChange} searchValue={this.state["search-form2"]} />
+                */}
                 <div className="widget widget_categories group">
                     <h3>Categories.</h3>
                     <ul>
