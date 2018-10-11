@@ -59,14 +59,13 @@ class Footer extends React.Component {
       
                   <ul className="navigate group">
                      <li><a href="#">Home</a></li>
-                     <li><a href="#">Blog</a></li>
-                     <li><a href="#">Demo</a></li>
+                     <li><a href="#">Blog</a></li>                     
                      <li><a href="#">Archives</a></li>
                      <li><a href="#">About</a></li>
                   </ul>
                </div>
       
-               <p className="copyright">&copy; Copyright 2018 Hoang's Blog. &nbsp; Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a>.</p>
+               <p className="copyright">&copy; Copyright 2018 Ngộ's Blog. &nbsp; Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a>.</p>
               
             </div> 
       
