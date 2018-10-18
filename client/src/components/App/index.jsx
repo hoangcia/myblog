@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 
-import { Home, About, Page } from '../';
+import { Home, About, Page, NewBlogEntry } from '../';
 
 
 class App extends React.Component {
@@ -93,7 +93,9 @@ class App extends React.Component {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/home" component={Home} />
+        <Route exact path="/about" component={About} />
         <Route exact path="/page" component={Page} />
+        <Route exact path="/newBlogEntry" component={NewBlogEntry} />
       </Switch>
     )
   }
