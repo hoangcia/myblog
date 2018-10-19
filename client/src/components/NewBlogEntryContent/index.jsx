@@ -14,36 +14,54 @@ class NewBlogEntryContent extends React.Component {
           .then((res) => onLoad(res.data));
           */
     }
+    onEditorInit(editor) {
+        // You can store the "editor" and use when it is needed.
+        editor.ui.view.editable.element.style.height = (document.documentElement.clientHeight * 0.5) + "px";
+        console.log('Editor is ready to use!', editor);
+    }
+    onEditorChange(event, editor) {
+        const data = editor.getData();
+        console.log({ event, editor, data });
+    }
     render() {
         /*
         const { articles } = this.props;
        */
         //console.log(blogEntryComponents);
-        let config = {};
+        let config = {},
+        btnBarStyles = {
+            float: "right"
+        },
+        margin5 = {
+            margin: "5px"
+        },
+        whiteBg = {
+            "background-color": "white",
+            "color": "#333333",
+            "border": "solid 1px #CFCFCF"
+        };
         return (
             <div id="content-wrap">
-{/*
                 <div className="row">
-*/}
                     <div id="main" className="twelve columns">
-                        <CKEditor
-                            editor={ClassicEditor}
-                            data="<p>Hello from CKEditor 5!</p>"
-                            onInit={editor => {
-                                // You can store the "editor" and use when it is needed.
-                                editor.config.set("height",600);
-                                console.log('Editor is ready to use!', editor);
-                            }}
-                            config={config}
-                            onChange={(event, editor) => {
-                                const data = editor.getData();
-                                console.log({ event, editor, data });
-                            }}
-                        />
+                        <div id="blog-editor">
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data="<p>Hello from CKEditor 5!</p>"
+                                onInit={this.onEditorInit}
+                                config={config}
+                                onChange={this.onEditorChange}
+                            />
+                        </div>
+                        <div id="button-bar">
+                            <div style={btnBarStyles}>
+                                <button id="preview" style={Object.assign(whiteBg,Object.assign({},margin5))}>Preview</button>
+                                <button id="save" style={margin5}>Save</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-    
-    //        </div>    
+            </div>
         );
     }
 }
